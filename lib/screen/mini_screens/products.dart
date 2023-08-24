@@ -42,7 +42,8 @@ class _ProductsState extends State<Products> {
           physics: const BouncingScrollPhysics(),
           children: [
             ProductTabs.productTab(prodList: prodProvider.products),
-            ProductTabs.materialTab(matList: prodProvider.matter),
+            ProductTabs.materialTab(
+                matList: prodProvider.matter, context: context),
           ],
         ),
       ),

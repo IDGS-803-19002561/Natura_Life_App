@@ -57,8 +57,8 @@ class ProductTabs {
   }
 
 //------------------------------------------------------------------------------
-
-  static Widget materialTab({required List matList}) {
+  static Widget materialTab(
+      {required List matList, required BuildContext context}) {
     return matList.isEmpty
         ? Center(
             child: Text(
@@ -66,29 +66,52 @@ class ProductTabs {
               style: WidgetTheme.appbarTitle,
             ),
           )
-        : Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ListView.builder(
-              itemCount: matList.length,
-              itemBuilder: (context, index) {
-                var item = matList[index];
-                return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      title: Text(item['nombre']),
-                      trailing: Text(
-                        '${item['cantidad']} ${item['unidadMedida']}',
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: AppTheme.fifth),
+        : Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ListView.builder(
+                  itemCount: matList.length,
+                  itemBuilder: (context, index) {
+                    var item = matList[index];
+                    return GestureDetector(
+                      onTap: () {
+                        print(matList[index]);
+                        Navigator.pushNamed(context, '/MateriaPrima',
+                            arguments: matList[index]);
+                      },
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            title: Text(
+                              item['Nombre'].toUpperCase(),
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: AppTheme.fifth,
+                              ),
+                            ),
+                            trailing: Text(item['Codigo'].toUpperCase()),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              },
-            ),
+                    );
+                  },
+                ),
+              ),
+              Positioned(
+                bottom: 16,
+                right: 16,
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/AddEditMatter',
+                        arguments: {'isEdit': false});
+                  },
+                  child: Icon(Icons.add),
+                ),
+              ),
+            ],
           );
   }
 }

@@ -32,6 +32,14 @@ class UtilProvider extends ChangeNotifier {
     return response;
   }
 
+  Future apiRest({required String urlBase}) async {
+    var response = await http.get(Uri.parse(urlBase), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    return response;
+  }
+
   Future deleteHTTP({required int id, required String urlBase}) async {
     var response = await http.delete(Uri.parse(urlBase), headers: {
       'Content-Type': 'application/json',

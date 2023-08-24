@@ -172,6 +172,25 @@ class ReusableWidgets {
     );
   }
 
+  static Padding userProduct({required String data, required IconData icon}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(
+            icon,
+            color: AppTheme.fourth,
+          ),
+          Text(
+            data,
+            style: WidgetTheme.shortText,
+          )
+        ],
+      ),
+    );
+  }
+
   static FloatingActionButton floatingActionButton(
       {required VoidCallback action, required IconData icon}) {
     return FloatingActionButton(
@@ -185,9 +204,15 @@ class ReusableWidgets {
   }
 
   static TextFormField formInput(
-      {required IconData icon, required String label, bool obscure = false}) {
+      {required IconData icon,
+      required String label,
+      bool obscure = false,
+      String? value,
+      bool? readOnly}) {
     return TextFormField(
+      readOnly: readOnly ?? false,
       autocorrect: false,
+      initialValue: value,
       keyboardType: TextInputType.text,
       obscureText: obscure,
       decoration: InputDecoration(

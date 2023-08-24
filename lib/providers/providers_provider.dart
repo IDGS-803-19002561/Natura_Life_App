@@ -11,9 +11,7 @@ class ProvidersProvider extends ChangeNotifier {
   List<dynamic> providers = [];
   var provider = {};
 
-  ProvidersProvider() {
-    getProviders();
-  }
+  // ProvidersProvider() {getProviders();}
 
   Future getProviders() async {
     final String url = '$_urlBase/Proveedores';

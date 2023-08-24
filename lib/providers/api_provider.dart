@@ -53,8 +53,10 @@ class APiProvider extends ChangeNotifier {
   }
 
   Future getMatter() async {
-    final String url = '$_urlBase/MateriaPrimas';
-    final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
+    // final String url = '$_urlBase/MateriaPrimas';
+    const String url = 'http://localhost/api/MateriasPrimas.php';
+    final response = await UtilProvider.rtp.apiRest(urlBase: url);
+    // final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
     if (response.statusCode == 200) {
       var jResponse = jsonDecode(response.body) as List<dynamic>;
       matter = jResponse;
